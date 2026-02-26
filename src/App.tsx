@@ -122,19 +122,6 @@ function BackgroundVideo({ src, lazy = false, zoom = false, className }: Backgro
   )
 }
 
-function Icon({ path }: { path: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-5 w-5 text-white/70"
-      aria-hidden="true"
-    >
-      <path d={path} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
 function App() {
   const [scrolled, setScrolled] = useState(false)
   const year = useMemo(() => new Date().getFullYear(), [])
@@ -146,22 +133,48 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const features = useMemo(
+  const platformBlocks = useMemo(
     () => [
       {
-        title: 'AI Remaining Life Prediction',
-        description: 'Forecast usable capacity and performance fade with lab-grade confidence.',
-        icon: 'M4.5 19.5V5.2c0-.6.5-1.1 1.1-1.1h12.8c.6 0 1.1.5 1.1 1.1v14.3M7 16.5h10M7 13.2h6.5M7 9.9h10',
+        title: 'Remaining Useful Life Modeling',
+        description:
+          'Quantifies pack and module-level degradation under real operating conditions to support reuse and warranty decisions.',
       },
       {
-        title: 'Fire Risk Analysis',
-        description: 'Detect thermal instability signals early and quantify safety risk before reuse.',
-        icon: 'M12 3.5c2.2 2.1 4 4.3 4 7.2 0 2.7-1.8 4.8-4 4.8s-4-2.1-4-4.8c0-2.9 1.8-5.1 4-7.2ZM6 20.5c1.4-1.1 3.4-1.8 6-1.8s4.6.7 6 1.8',
+        title: 'Thermal Risk Classification',
+        description:
+          'Surfaces abnormal thermal behaviour and flags assets that breach operational safety thresholds before deployment.',
       },
       {
-        title: 'CO₂ Savings Estimation',
-        description: 'Model embodied carbon avoided with second-life deployment vs recycling pathways.',
-        icon: 'M5 12c0-3.9 3.1-7 7-7s7 3.1 7 7-3.1 7-7 7S5 15.9 5 12Zm3.2.1h7.6M12 8.6v6.8',
+        title: 'Carbon Impact Scoring',
+        description:
+          'Calculates embodied carbon outcomes across reuse, remanufacture, and recycling pathways for compliance reporting.',
+      },
+    ],
+    [],
+  )
+
+  const capabilities = useMemo(
+    () => [
+      {
+        title: 'Telemetry Ingestion Engine',
+        description:
+          'Ingests heterogeneous pack and BMS telemetry at scale with schema normalization, validation, and quality controls.',
+      },
+      {
+        title: 'AI Health Modeling',
+        description:
+          'Combines physics-informed and data-driven models to estimate state-of-health, degradation trajectory, and failure modes.',
+      },
+      {
+        title: 'Safety & Risk Classification',
+        description:
+          'Classifies operational risk to support enforceable safety policies, audit trails, and regulatory documentation.',
+      },
+      {
+        title: 'Circularity Impact Scoring',
+        description:
+          'Scores economic and carbon outcomes to route batteries toward second-life, remanufacture, or recycling.',
       },
     ],
     [],
@@ -177,18 +190,26 @@ function App() {
         ].join(' ')}
       >
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="tracking-wide text-white/90 hover:text-white transition-colors">
-            <span className="font-medium">S2S</span>
+          <a href="#top" className="text-white hover:text-white transition-colors">
+            <span className="flex flex-col leading-tight">
+              <span className="text-2xl font-semibold tracking-tight sm:text-3xl">S2S</span>
+              <span className="mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.28em] text-white/70 sm:text-xs">
+                Scrap to Spark
+              </span>
+            </span>
           </a>
           <div className="hidden items-center gap-6 text-sm text-white/70 sm:flex">
-            <a className="hover:text-white transition-colors" href="#features">
-              Features
+            <a className="hover:text-white transition-colors" href="#platform">
+              Platform
+            </a>
+            <a className="hover:text-white transition-colors" href="#capabilities">
+              Capabilities
             </a>
             <a className="hover:text-white transition-colors" href="#second-life">
               Second-life
             </a>
-            <a className="hover:text-white transition-colors" href="#cta">
-              Analysis
+            <a className="hover:text-white transition-colors" href="#contact">
+              Contact
             </a>
           </div>
         </nav>
@@ -199,77 +220,91 @@ function App() {
         <div className="absolute inset-0">
           <BackgroundVideo src="/videos/hero.mp4" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black/35" />
-          <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_20%,rgba(99,184,127,0.10),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_20%,rgba(99,184,127,0.06),transparent_60%)]" />
         </div>
 
-        <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 pt-20 text-center">
+        <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col items-start justify-center px-6 pt-24 pb-20">
           <p
             className="s2s-fade-up text-xs font-medium tracking-[0.28em] text-white/60"
             style={{ animationDelay: '100ms' }}
           >
-            CLIMATE-TECH AI • BATTERY INTELLIGENCE
+            CLIMATE-TECH AI PLATFORM
           </p>
           <h1
-            className="s2s-fade-up mt-5 text-balance text-5xl font-medium leading-[1.02] tracking-[-0.02em] text-white sm:text-7xl"
+            className="s2s-fade-up mt-5 max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-6xl"
             style={{ animationDelay: '220ms' }}
           >
-            Scrap to Spark
+            Battery Intelligence Infrastructure
+            <br className="hidden sm:block" />
+            for the Second-Life Economy
           </h1>
           <p
-            className="s2s-fade-up mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/70 sm:text-lg"
+            className="s2s-fade-up mt-6 max-w-xl text-pretty text-sm leading-relaxed text-white/70 sm:text-base"
             style={{ animationDelay: '340ms' }}
           >
-            Turning Battery Scrap Into Energy Assets With AI
+            S2S transforms raw EV battery telemetry into defensible reuse, risk, and carbon impact decisions — engineered
+            for commercial and regulatory rigor.
           </p>
 
           <div className="s2s-fade-up mt-10" style={{ animationDelay: '460ms' }}>
-            <a
-              href="#cta"
-              className="group inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-medium text-ink shadow-[0_18px_50px_-22px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out hover:scale-[1.02] active:scale-[0.99]"
-            >
-              Analyze a Battery
-              <span className="ml-2 text-ink/70 transition-transform duration-300 group-hover:translate-x-0.5">
-                →
-              </span>
-            </a>
-            <div className="mt-4 text-xs text-white/45">
-              Precision decisions for reuse vs recycle — in minutes.
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-accent/90"
+              >
+                Request Platform Access
+              </a>
+              <a
+                href="#capabilities"
+                className="inline-flex items-center justify-center rounded-full border border-white/25 px-7 py-3 text-sm font-medium text-white/85 hover:border-white/40 hover:text-white"
+              >
+                View Capabilities
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="relative border-t border-white/10 bg-ink py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_0%,rgba(255,255,255,0.05),transparent_70%)]" />
-        <div className="relative mx-auto max-w-6xl px-6">
+      {/* Platform Overview */}
+      <section id="platform" className="border-top border-white/10 bg-ink py-28">
+        <div className="mx-auto max-w-6xl px-6">
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-medium tracking-[-0.01em] text-white sm:text-3xl">
-              Intelligence you can trust
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-white/65 sm:text-base">
-              Built for operators, recyclers, and second-life integrators—S2S turns complex battery signals into
-              defensible decisions.
+            <p className="text-xs font-medium tracking-[0.24em] text-white/55">PLATFORM OVERVIEW</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Platform Overview</h2>
+            <p className="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
+              S2S is a battery asset intelligence platform built for recyclers, fleet operators, OEMs, and second-life
+              integrators. Our system evaluates performance degradation, thermal stability, and embodied carbon to determine
+              optimal end-of-life pathways.
             </p>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {features.map((f) => (
-              <article
-                key={f.title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl shadow-[0_30px_80px_-45px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out hover:-translate-y-1"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-black/20">
-                    <Icon path={f.icon} />
-                  </div>
-                  <h3 className="text-sm font-medium text-white/90">{f.title}</h3>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-white/60">{f.description}</p>
-                <div className="mt-6 h-px w-full bg-gradient-to-r from-white/0 via-white/10 to-white/0" />
-                <div className="mt-5 text-xs text-white/45">
-                  Designed for precision, safety, and sustainability.
-                </div>
+            {platformBlocks.map((block) => (
+              <article key={block.title} className="h-full rounded-2xl border border-white/12 bg-white/5 p-6 text-left">
+                <h3 className="text-sm font-semibold text-white/90">{block.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/65">{block.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section id="capabilities" className="border-t border-white/10 bg-ink-2 py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="max-w-2xl">
+            <p className="text-xs font-medium tracking-[0.24em] text-white/55">CAPABILITIES</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Capabilities</h2>
+            <p className="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
+              Infrastructure-grade analytics that connect EV battery telemetry to reuse, safety, and circularity outcomes.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
+            {capabilities.map((capability) => (
+              <article key={capability.title} className="h-full rounded-2xl border border-white/12 bg-white/5 p-6">
+                <h3 className="text-sm font-semibold text-white/90">{capability.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/65">{capability.description}</p>
               </article>
             ))}
           </div>
@@ -286,53 +321,110 @@ function App() {
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-6 text-center">
           <p className="text-xs font-medium tracking-[0.28em] text-white/55">SECOND LIFE • NOT LANDFILL</p>
           <h2 className="mt-5 text-balance text-4xl font-medium tracking-[-0.02em] text-white sm:text-5xl">
-            From Scrap to Second Life
+            Operating the Second-Life Battery Layer
           </h2>
           <p className="mt-5 max-w-2xl text-pretty text-sm leading-relaxed text-white/65 sm:text-base">
-            Make every pack count. S2S weighs value, risk, and carbon impact to route batteries into their highest
-            integrity path.
+            S2S evaluates every incoming pack on value, risk, and carbon impact to determine whether it should be reused,
+            remanufactured, or recycled—before it touches the field.
           </p>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section id="cta" className="border-t border-white/10 bg-ink-2 py-24">
+      <section id="cta" className="border-t border-white/10 bg-ink-2 py-28">
         <div className="mx-auto max-w-6xl px-6">
           <div className="rounded-3xl border border-white/10 bg-white/5 px-8 py-12 backdrop-blur-xl shadow-[0_40px_120px_-70px_rgba(0,0,0,0.95)] sm:px-12">
             <div className="grid items-center gap-10 md:grid-cols-[1.4fr_0.6fr]">
               <div>
                 <h3 className="text-3xl font-medium tracking-[-0.02em] text-white sm:text-4xl">
-                  Build the Second-Life Battery Economy
+                  Build Battery Intelligence Infrastructure
                 </h3>
                 <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base">
-                  Upload telemetry. Get AI health &amp; risk analysis. Receive a clear reuse or recycle decision—built
-                  to earn trust in the real world.
+                  Connect your telemetry, configure policies, and receive clear reuse or recycle recommendations with the
+                  rigor needed for OEM, fleet, and recycling partners.
                 </p>
               </div>
               <div className="flex md:justify-end">
                 <a
-                  href="#top"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-medium text-ink transition-transform duration-300 ease-out hover:scale-[1.02] active:scale-[0.99] md:w-auto"
+                  href="#contact"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-accent px-7 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-accent/90 md:w-auto"
                 >
-                  Analyze a Battery
+                  Request Platform Access
                 </a>
               </div>
             </div>
           </div>
-
-          <footer className="mt-14 flex flex-col items-center justify-between gap-3 text-xs text-white/40 sm:flex-row">
-            <div>© {year} Scrap to Spark (S2S)</div>
-            <div className="flex items-center gap-4">
-              <a className="hover:text-white/70 transition-colors" href="#features">
-                Features
-              </a>
-              <a className="hover:text-white/70 transition-colors" href="#second-life">
-                Second-life
-              </a>
-            </div>
-          </footer>
         </div>
       </section>
+
+      {/* Contact */}
+      <section id="contact" className="border-t border-white/10 bg-ink py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-10 md:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <p className="text-xs font-medium tracking-[0.24em] text-white/55">CONTACT</p>
+              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">
+                Contact S2S Technologies
+              </h3>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70 sm:text-base">
+                For pilots, commercial discussions, and technical evaluations, connect with our team using the details
+                alongside.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/12 bg-white/5 p-6 text-sm text-white/80 sm:p-7">
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-white/55">Email</div>
+                  <a
+                    href="mailto:contact@s2s-technologies.com"
+                    className="mt-1 inline-block text-sm text-white/90 hover:text-white"
+                  >
+                    contact@s2s-technologies.com
+                  </a>
+                </div>
+                <div>
+                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-white/55">Phone</div>
+                  <div className="mt-1 text-sm text-white/90">+91 80 4567 8901</div>
+                </div>
+                <div>
+                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-white/55">Address</div>
+                  <div className="mt-1 space-y-1 text-sm text-white/90">
+                    <div>S2S Technologies Pvt. Ltd.</div>
+                    <div>3rd Floor, Innovation Tower</div>
+                    <div>Whitefield Tech Park</div>
+                    <div>Bengaluru, Karnataka 560066</div>
+                    <div>India</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 bg-ink-2">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-6 py-6 text-xs text-white/45 sm:flex-row sm:items-center">
+          <div className="space-y-1">
+            <div>© {year} S2S Technologies</div>
+            <div className="text-white/55">Battery Intelligence Infrastructure</div>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <a className="hover:text-white/70 transition-colors" href="#platform">
+              Platform
+            </a>
+            <a className="hover:text-white/70 transition-colors" href="#capabilities">
+              Capabilities
+            </a>
+            <a className="hover:text-white/70 transition-colors" href="#second-life">
+              Second-Life
+            </a>
+            <a className="hover:text-white/70 transition-colors" href="#contact">
+              Contact
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
